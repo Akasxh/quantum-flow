@@ -1,46 +1,15 @@
-![Flowfunc](./docs/source/images/logo.png)
-
-A node editor for [plotly dash](https://dash.plotly.com/)
+# QFlow
 
 Detailed explanation -> [Link](./Explanation.md)
 
-Flowfunc is a plotly dash component which works as a web based node editor.
-You can create nodes based on python functions and connect them together to define
-the logic during runtime.
+You can use qflow to create nodes based on python functions and connect them together to define
+the logic during runtime usually repeating nodes such as functions used for mathematical experiments.
 
-[Demo](https://najeem.pythonanywhere.com/)
+[![Animation](./docs/source/images/animation.gif)]
 
-[![Animation](./docs/source/images/animation.gif)](https://najeem.pythonanywhere.com/)
-
-The front end is created using the react package [Flume](https://flume.dev). The
-data model is also heavily influenced by this package.
-## Installation
-
-**The package is still in alpha stage**. Please test out and let me know your
-comments.
-
-### Basic installation
-
-```
-pip install flowfunc
-```
-
-### Distributed
-If you want to run your nodes using [rq](https://python-rq.org/) in a distributed
-manner.
-```
-pip install flowfunc[distributed]
-```
-
-### Full installation
-
-In addition to the packages required for distributed run, this will install dash as well.
-```
-pip install flowfunc[full]
-```
 ## Basic Usage
 
-A fully functioning dash app with Flowfunc node editor would look like below.
+A fully functioning dash app with qflow node editor would look like below.
 The app will have the node editor and a button to evaluate the current state of
 the node editor. The result of the evaluation will be displayed in a separate `div`
 at the bottom.
