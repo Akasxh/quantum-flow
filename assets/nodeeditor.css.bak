@@ -1,0 +1,122 @@
+/* --- Modern Dark Theme for Node Editor --- */
+
+/* Root variables for easy theme management */
+:root {
+  --editor-bg: #111827; /* Dark navy background */
+  --node-bg: #1F2937; /* Dark slate for nodes */
+  --node-border: #4B5563;
+  --node-border-selected: #38BDF8; /* Light blue accent */
+  --title-color: #F9FAFB; /* Off-white for titles */
+  --text-color: #D1D5DB;
+  --socket-bg: #4B5563;
+  --socket-border: #9CA3AF;
+  --input-color: #A78BFA; /* Lavender for inputs */
+  --output-color: #6EE7B7; /* Mint green for outputs */
+  --connection-color: #52525B;
+  --connection-color-hover: #38BDF8;
+}
+
+/* Editor canvas styling */
+.node-editor {
+  background-color: var(--editor-bg);
+  background-image:
+    linear-gradient(var(--node-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--node-border) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: center;
+  overflow: hidden;
+  cursor: grab;
+}
+
+.node-editor:active {
+    cursor: grabbing;
+}
+
+/* Node styling */
+.node {
+  background: var(--node-bg);
+  border: 1px solid var(--node-border);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  min-width: 180px;
+  transition: border-color 0.2s ease-in-out;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.node.selected {
+  border-color: var(--node-border-selected);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.3);
+}
+
+.node .title {
+  background-color: #374151;
+  color: var(--title-color);
+  font-weight: 600;
+  padding: 8px 12px;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  border-bottom: 1px solid var(--node-border);
+}
+
+.node .control {
+    padding: 12px;
+    color: var(--text-color);
+}
+
+.node .input, .node .output {
+    padding: 0 12px;
+}
+
+.node .input-title, .node .output-title {
+    color: var(--text-color);
+    text-align: left;
+}
+
+.node .output-title {
+    text-align: right;
+}
+
+/* Socket (I/O ports) styling */
+.socket {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--socket-bg);
+  border: 2px solid var(--socket-border);
+  margin: 10px 0;
+  vertical-align: middle;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.socket:hover {
+    transform: scale(1.1);
+}
+
+.socket.input {
+  border-color: var(--input-color);
+}
+
+.socket.output {
+  border-color: var(--output-color);
+}
+
+.socket.input:hover {
+    background: var(--input-color);
+}
+
+.socket.output:hover {
+    background: var(--output-color);
+}
+
+/* Connection (cable) styling */
+.connection {
+  fill: none;
+  stroke: var(--connection-color);
+  stroke-width: 3px;
+  transition: stroke 0.2s;
+}
+
+.connection:hover {
+    stroke: var(--connection-color-hover);
+}

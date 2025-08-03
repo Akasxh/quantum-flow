@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantumFlow</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="logo">QF</h1>
+                <span>QuantumFlow</span>
+            </div>
+            <nav class="menu">
+                <a href="#" class="menu-item active">
+                    <span class="icon">📊</span> Dashboard
+                </a>
+                <a href="#" class="menu-item">
+                    <span class="icon">🛠️</span> Circuit Builder
+                </a>
+                <a href="#" class="menu-item">
+                    <span class="icon">🔬</span> Experiments
+                </a>
+                <a href="#" class="menu-item">
+                    <span class="icon">📈</span> Results
+                </a>
+                <a href="#" class="menu-item">
+                    <span class="icon">⚙️</span> Settings
+                </a>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="main-header">
+                <h2>Dashboard</h2>
+                <p>Welcome back, User!</p>
+            </header>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        Recent Experiment
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Name:</strong> Bell State Test</p>
+                        <p><strong>Status:</strong> <span class="status-completed">Completed</span></p>
+                        <p><strong>Result:</strong> 51% |00⟩, 49% |11⟩</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="button">View Details</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        Quantum Circuit
+                    </div>
+                    <div class="card-body">
+                        <p>A simple 2-qubit circuit with a Hadamard gate on the first qubit and a CNOT gate.</p>
+                        <pre><code>q = QuantumRegister(2)
+c = ClassicalRegister(2)
+qc = QuantumCircuit(q, c)
+qc.h(q[0])
+qc.cx(q[0], q[1])</code></pre>
+                    </div>
+                </div>
+                 <div class="card">
+                    <div class="card-header">
+                        Qubit States
+                    </div>
+                    <div class="card-body">
+                        <p>Real-time visualization of qubit states.</p>
+                        <div class="qubit-visualization">
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
