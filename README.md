@@ -2,6 +2,8 @@
 
 A node editor for [plotly dash](https://dash.plotly.com/)
 
+[Detailed explanation ➜](./explanation.md)
+
 Flowfunc is a plotly dash component which works as a web based node editor.
 You can create nodes based on python functions and connect them together to define
 the logic during runtime.
