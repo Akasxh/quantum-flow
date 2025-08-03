@@ -1,0 +1,11 @@
+include flowfunc/flowfunc.min.js
+include flowfunc/flowfunc.min.js.map
+include flowfunc/async-*.js
+include flowfunc/async-*.js.map
+include flowfunc/*-shared.js
+include flowfunc/*-shared.js.map
+include flowfunc/metadata.json
+include flowfunc/package-info.json
+include README.md
+include LICENSE
+include package.json
