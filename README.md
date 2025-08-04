@@ -99,17 +99,6 @@ now with an addtional `result` attribute on each node. If you are running in
 a distributed way, it will have a `job_id` attribute on every node. You can use
 this `job_id` and the `queue` object to retrieve the results of the node.
 
-```python
-Flowfunc(id="nodeeditor", config=nodeeditor_config.dict())
-```
-This is the dash component with `id` equal to `nodeeditor`. You need to pass in
-the config object created previously, but converted to a dictionary.
-
-## More examples
-
-Look into the examples folder to see a more elaborate example with better looking
-interface using `dash-boostrap-components`. There is also an example which uses
-the distributed method where each node is evaluated in a separate `rqworker`.
 
 ## Nodes
 

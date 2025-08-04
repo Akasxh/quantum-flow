@@ -36,24 +36,15 @@
 | ----------------------- | ---------------------- | ---------------------------------------------------------------------- |
 | **sync** (default)      | `JobRunner.run(nodes)` | Uses plain Python calls in the main thread.                            |
 | **async**               | `run_async=True`       | Uses `asyncio`; each node runs as a coroutine (`evaluate_node_async`). |
-| **distributed**         | `distributed=True`     | Publishes each node as an **RQ job** (Redis queue).                    |
-| **async + distributed** | both flags             | `asyncio` submits jobs but still waits on RQ futures.                  |
 
-All modes funnel through **`evaluate_node_async`**, which:
+Trying for queue in a similar flow:
 
-1. Waits for input nodes (via `asyncio.Event` or RQ job ids).
+1. Waits for input nodes (via `asyncio.Event`).
 2. Uses **Pydantic validation** to coerce/validate inputs.
 3. Executes the original Python callable (awaits if coroutine).
 4. Maps the returned value(s) back to output port names.
 5. Marks the node status (`success`, `error`, etc.) and fires events so dependents can proceed.
 
-### 3.3 Distributed extras
-
-* **`NodeQueue`** subclasses `rq.Queue` to store extra metadata (port mappings).
-* **`NodeJob`** wraps an RQ Job; `update_kwargs` injects results from prerequisite jobs automatically before the worker runs the node.
-* You can point different nodes at different RQ queues (e.g. CPU vs GPU workers) by setting queue names in the node metadata.
-
----
 
 ## 4. Reporting status back to the UI
 
@@ -76,26 +67,14 @@ flowfunc/
 ├─ __init__.py
 ├─ config.py        # Config.from_function_list, PortDef logic
 ├─ models.py        # Node, OutNode, Port dataclasses (+ pydantic)
-├─ jobrunner.py     # JobRunner, evaluate_node_async, distributed helpers
-├─ jobqueue.py      # NodeQueue wrapper over RQ
+├─ jobrunner.py     # JobRunner, evaluate_node_async
+├─ jobqueue.py      # NodeQueue wrapper 
 ├─ frontend/        # React (Flume) bundle compiled to JS/CSS
 └─ utils/           # topo-sort, validators, misc helpers
 ```
-
----
-
-## 6. How to extend or customise
-
-| Task                            | Where to touch                                                                                                                          |
-| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add new math nodes**          | Just write a new Python function and re-generate `Config`.  Decorate with `Annotated` to add labels, dropdowns, or hide ports.          |
-| **Restrict port compatibility** | Provide concrete type annotations (e.g. `float`, `int`) instead of generic objects; Flowfunc will stop you connecting mismatched types. |
-| **Change UI look**              | Pure Dash/Bootstrap/CSS (as we did).  You never edit `frontend/` unless you want to rebuild the React bundle.                           |
-| **Run on a cluster**            | Install Redis + `pip install rq`; create `rqworker` processes; call `JobRunner(distributed=True, redis_url=...)`.                       |
-
 ---
 
 ### TL;DR
 
 Flowfunc turns *ordinary* Python functions → **Node definitions → JSON → React canvas**.
-At run-time the **JobRunner** topologically orders the user-drawn graph, validates inputs with **Pydantic**, then executes each function synchronously, asynchronously, or on an RQ cluster—writing results back to Dash so you can render them or colour nodes accordingly.  All the UI tweaks you make in Dash leave that pipeline completely untouched.
+At run-time the **JobRunner** topologically orders the user-drawn graph, validates inputs with **Pydantic**, then executes each function synchronously, asynchronously.
